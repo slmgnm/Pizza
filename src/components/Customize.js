@@ -7,7 +7,11 @@ import Mushroom from "../assets/Mushroom.png";
 import Basil from "../assets/Basil.png";
 import Tomato from "../assets/Tomato.png";
 import BaseCheese from "../assets/BaseCheese.png";
+import { useHistory } from "react-router-dom";
+
 export default function Customize({ ingredients, setIngredients }) {
+
+  let history = useHistory();
   const onChange = (event, name) => {
     // console.log(localStorage);
     let newIngredients = JSON.parse(JSON.stringify(ingredients));
@@ -157,6 +161,7 @@ export default function Customize({ ingredients, setIngredients }) {
           />
           <span className="checkmark"></span>
         </label>
+        <button onClick={()=> history.push('/checkout')}> Proceed to checkout</button>
       </div>
     </div>
   );
