@@ -1,7 +1,7 @@
 import Header from "./components/Header";
 import Customize from "./components/Customize";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Checkout from './components/Checkout';
 function App() {
   const [ingredients, setIngredients] = useState({
@@ -12,6 +12,15 @@ function App() {
     pineapple: false,
     tomato: false,
   });
+
+  useEffect(() => {
+const data = localStorage.getItem("ingredients");
+if (data){
+
+  setIngredients(JSON.parse(data));
+}
+
+  },[]);
 
   return (
     <div>

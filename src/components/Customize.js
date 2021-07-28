@@ -10,8 +10,8 @@ import BaseCheese from "../assets/BaseCheese.png";
 import { useHistory } from "react-router-dom";
 
 export default function Customize({ ingredients, setIngredients }) {
-
   let history = useHistory();
+
   const onChange = (event, name) => {
     // console.log(localStorage);
     let newIngredients = JSON.parse(JSON.stringify(ingredients));
@@ -19,11 +19,12 @@ export default function Customize({ ingredients, setIngredients }) {
     setIngredients(newIngredients);
     // localStorage.setItem("ingredients", JSON.stringify(newIngredients));
   };
+
   return (
     <div style={{ display: "flex" }}>
-      <div style={{ border: "2px solid black", flex: 1 }}>
+      <div style={{ flex: 1, padding: 40 }}>
         <div style={{ maxHeight: 500, maxWidth: 500, position: "relative" }}>
-        <motion.div
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{
               y: ingredients["basil"] ? 100 : -100,
@@ -64,7 +65,7 @@ export default function Customize({ ingredients, setIngredients }) {
               opacity: ingredients["tomato"] ? 1 : 0,
             }}
             transition={{ duration: 1 }}
-            className="ingredients z3"
+            className="ingredients z4"
           >
             <img src={Tomato} alt="Tomato" height="100%" width="100%" />
           </motion.div>
@@ -88,7 +89,7 @@ export default function Customize({ ingredients, setIngredients }) {
               opacity: ingredients["mushroom"] ? 1 : 0,
             }}
             transition={{ duration: 1 }}
-            className="ingredients z3"
+            className="ingredients z4"
           >
             <img src={Mushroom} alt="Pizza Base" height="100%" width="100%" />
           </motion.div>
@@ -98,7 +99,7 @@ export default function Customize({ ingredients, setIngredients }) {
           </motion.div>
         </div>
       </div>
-      <div style={{ border: "2px solid black", flex: 1 }}>
+      <div style={{ flex: 1, padding: 40 }}>
         <label className="container-checkbox">
           Pineapple
           <input
@@ -161,7 +162,12 @@ export default function Customize({ ingredients, setIngredients }) {
           />
           <span className="checkmark"></span>
         </label>
-        <button onClick={()=> history.push('/checkout')}> Proceed to checkout</button>
+        <button
+          onClick={() => history.push("/checkout")}
+          className="proceedToCheckout"
+        >
+          Proceed to Checkout
+        </button>
       </div>
     </div>
   );

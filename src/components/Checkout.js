@@ -1,16 +1,19 @@
-import React from "react";
-import { useHistory } from "react-router";
-import { useState } from "react";
-import PizzaMan from "../assets/PizzaMan.png"
-export default function Checkout({ ingredients }) {
-const history = useHistory(); 
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import Pizzaman from "../assets/PizzaMan.png";
 
-    const[success, setSuccess] = useState(false);
+export default function Checkout({ ingredients }) {
+  const history = useHistory();
+  const [success, setSuccess] = useState(false);
+
   return (
-    <div style={{ display: "flex" }}>
-      <div>
+    <div style={{ padding: 50, display: "flex" }}>
+      <div style={{ flex: 1 }}>
         <div>
-          <h1>My Ingredients</h1>
+          <h1 style={{ fontFamily: "Comfortaa" }}>My Ingredient</h1>
+          {Object.keys(ingredients).reduce((acc, ing) => {
+            return acc + ingredients[ing] ? 1 : 0;
+          }, 0) === 0 && <p>No ingredients Selected</p>}
           {Object.keys(ingredients).map((ingredient) => {
             return (
               ingredients[ingredient] && (
@@ -21,13 +24,25 @@ const history = useHistory();
               )
             );
           })}
-          <button onClick= { ()=> setSuccess(true)}>Confirm</button>
-          <button  onClick= { ()=> history.push('/')}>Go back</button>
+          <button
+            className="proceedToCheckout"
+            onClick={() => history.push("/")}
+          >
+            Go Back
+          </button>
+          <button
+            onClick={() => setSuccess(true)}
+            className="proceedToCheckout"
+            style={{ marginLeft: 10 }}
+          >
+            Confirm
+          </button>
         </div>
       </div>
-      <div>{success && (
+      <div style={{ flex: 1 }}>
+        {success && (
           <div style={{ textAlign: "center" }}>
-            <img src={PizzaMan} alt="pizzaman" height="300px" />
+            <img src={Pizzaman} alt="pizzaman" height="300px" />
             <div style={{ fontFamily: "Open Sans Condensed", fontSize: 35 }}>
               We have received your order, Thank you
             </div>
@@ -38,7 +53,8 @@ const history = useHistory();
               Will be ready in 20-30 min.
             </div>
           </div>
-        )}</div>
+        )}
+      </div>
     </div>
   );
 }
