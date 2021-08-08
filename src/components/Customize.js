@@ -13,7 +13,8 @@ export default function Customize({ ingredients, setIngredients }) {
   let history = useHistory();
 
   const onChange = (event, name) => {
-    // console.log(localStorage);
+     //stringify method converts a JavaScript object or value to a JSON string
+    //JSON.parse Parse a string (written in JSON format) and return a JavaScript object
     let newIngredients = JSON.parse(JSON.stringify(ingredients));
     newIngredients[name] = event;
     setIngredients(newIngredients);
